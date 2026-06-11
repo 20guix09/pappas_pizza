@@ -1,0 +1,1 @@
+Arquivos atualizados do site Pappa's Pizza. Copie index.html, style.css e script.js para a mesma pasta. Use sua logo como logo.png na mesma pasta.

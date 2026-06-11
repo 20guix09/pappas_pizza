@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pappa's Pizza - A verdadeira pizza artesanal. Peça online direto pelo WhatsApp." />
+    <title>Pappa's Pizza | Pedido Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="logo.png">
+  </head>
+  <body>
+    <div class="bg-pattern"></div>
+
+    <header class="site-header" id="topo">
+      <a class="brand" href="#topo" aria-label="Pappa's Pizza">
+        <img src="logo.png" alt="Logo Pappa's Pizza" onerror="this.src='https://placehold.co/100x100/111111/28a745?text=PP'" />
+        <span>Pappa's Pizza</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" id="menuToggle">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#pizzas">Pizzas</a>
+        <a href="#esfihas">Esfihas</a>
+        <a href="#bebidas">Bebidas</a>
+      </nav>
+
+      <button class="cart-btn" type="button" aria-label="Abrir carrinho" id="openCartBtn">
+        <i data-lucide="shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h1>A verdadeira<br />pizza artesanal</h1>
+          <p>Massa de fermentação natural e ingredientes selecionados. Monte seu pedido e receba em casa com total conforto.</p>
+          <a href="#pizzas" class="btn btn-primary">
+            <i data-lucide="pizza"></i> Fazer Pedido
+          </a>
+        </div>
+      </section>
+
+      <section id="pizzas" class="section">
+        <h2 class="section-title">Pizzas</h2>
+        <p class="section-subtitle">Escolha a categoria e monte a sua pizza passo a passo.</p>
+        <div style="text-align: center; margin-bottom: 40px;">
+          <button class="btn btn-primary" type="button" id="startOrderBtn" style="font-size: 1.2rem; padding: 15px 30px;">
+            <i data-lucide="pizza"></i> Montar Pizza Agora
+          </button>
+        </div>
+      </section>
+
+      <section id="esfihas" class="section bg-darker">
+        <h2 class="section-title">Esfihas</h2>
+        <p class="section-subtitle">Deliciosas esfihas abertas, salgadas e doces.</p>
+        
+        <h3 class="category-title">Esfihas Salgadas</h3>
+        <div class="menu-grid" id="esfihasSalgadasGrid"></div>
+        
+        <h3 class="category-title" style="margin-top: 40px;">Esfihas Doces</h3>
+        <div class="menu-grid" id="esfihasDocesGrid"></div>
+      </section>
+
+      <section id="bebidas" class="section">
+        <h2 class="section-title">Bebidas</h2>
+        <p class="section-subtitle">Refrigerantes, sucos e cervejas bem geladas.</p>
+        <div class="menu-grid" id="drinksGrid"></div>
+      </section>
+    </main>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+      <div class="cart-header">
+        <h2>Seu Carrinho</h2>
+        <button class="close-btn" type="button" id="closeCartBtn">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="cart-body">
+        <div id="customerDataSection" class="cart-step active">
+          <p class="step-desc">Preencha seus dados para habilitar o carrinho e finalizar o pedido.</p>
+          <form class="checkout-form" id="checkoutForm">
+            <label>
+              Nome completo
+              <input type="text" id="customerName" placeholder="Seu nome" required />
+            </label>
+            <label>
+              Telefone / WhatsApp
+              <input type="tel" id="customerPhone" placeholder="(XX) XXXXX-XXXX" required />
+            </label>
+            <label>
+              CPF (Para o código do pedido)
+              <input type="text" id="customerCPF" placeholder="000.000.000-00" maxlength="14" required />
+            </label>
+            <label>
+              Método de entrega
+              <select id="deliveryMethod" required>
+                <option value="Entrega">Entrega (Motoboy)</option>
+                <option value="Retirada">Retirada no balcão</option>
+              </select>
+            </label>
+            <label id="addressLabel">
+              Endereço completo
+              <textarea id="customerAddress" rows="2" placeholder="Rua, número, bairro e ponto de referência" required></textarea>
+            </label>
+            <label>
+              Forma de pagamento
+              <select id="paymentMethod" required>
+                <option value="Pix">Pix</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                <option value="Cartão de Débito">Cartão de Débito</option>
+              </select>
+            </label>
+            <label id="changeLabel" style="display: none;">
+              Troco para quanto? (Deixe em branco se não precisar)
+              <input type="text" id="customerChange" placeholder="Ex: 50 reais" />
+            </label>
+            <button class="btn btn-primary full" type="submit" id="saveDataBtn">
+              Salvar e ir para o Carrinho
+            </button>
+          </form>
+        </div>
+
+        <div id="cartItemsSection" class="cart-step">
+          <div class="customer-summary">
+            <div>
+              <strong id="summaryName"></strong>
+              <p id="summaryDetails"></p>
+            </div>
+            <button type="button" class="btn-text" id="editDataBtn" title="Editar dados">
+              <i data-lucide="edit"></i> Editar
+            </button>
+          </div>
+          
+          <div id="cartItemsList" class="cart-items-list">
+            <p class="empty-cart">Seu carrinho está vazio.</p>
+          </div>
+
+          <div class="cart-total">
+            <span>Valor Total:</span>
+            <strong id="cartTotal">R$ 0,00</strong>
+          </div>
+
+          <button class="btn btn-success full" type="button" id="openConfirmModalBtn">
+            <i data-lucide="check-circle"></i> Conferir e Finalizar
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="modal-overlay" id="pizzaBuilderModal">
+      <div class="modal-content large">
+        <button class="close-btn" type="button" id="closeBuilderBtn"><i data-lucide="x"></i></button>
+        <h2 style="color: var(--text-main);">Montar Pizza</h2>
+        
+        <div class="builder-step" id="step1">
+          <label>1. Escolha o Tipo e o Tamanho da Pizza</label>
+          <select id="buildTypeSize">
+            <option value="" disabled selected>Selecione...</option>
+            </select>
+        </div>
+
+        <div class="builder-step disabled" id="step2">
+          <label>2. Escolha a Borda</label>
+          <select id="buildBorder" disabled>
+            <option value="Sem borda recheada">Sem borda recheada - R$ 0,00</option>
+            <option value="Borda de Catupiry">Borda de Catupiry - R$ 10,00</option>
+            <option value="Borda de Cheddar">Borda de Cheddar - R$ 10,00</option>
+            <option value="Borda de Chocolate">Borda de Chocolate (Apenas Doce) - R$ 12,00</option>
+          </select>
+        </div>
+
+        <div class="builder-step disabled" id="step3">
+          <label>3. Quantidade de Sabores</label>
+          <select id="buildFlavorQty" disabled>
+            <option value="1">1 Sabor (Inteira)</option>
+            <option value="2">2 Sabores (Meio a meio)</option>
+            <option value="3" id="opt3sabores" style="display:none;">3 Sabores</option>
+            <option value="4" id="opt4sabores" style="display:none;">4 Sabores</option>
+          </select>
+        </div>
+
+        <div class="builder-step disabled" id="step4">
+          <label>4. Escolha os Sabores <span id="flavorWarning" class="warning-text"></span></label>
+          <p class="step-helper">Filtro aplicado conforme a categoria escolhida.</p>
+          <div class="flavor-list" id="buildFlavorList">
+            </div>
+        </div>
+
+        <div class="builder-step disabled" id="step5">
+          <label>5. Observações (Opcional)</label>
+          <textarea id="buildNotes" rows="2" placeholder="Ex: Sem cebola, bem assada..." disabled></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <div class="builder-total">Total desta pizza: <strong id="builderTotal">R$ 0,00</strong></div>
+          <button class="btn btn-primary" type="button" id="addPizzaToCartBtn" disabled>
+            <i data-lucide="plus"></i> Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="drinkUpsellModal">
+      <div class="modal-content small text-center upsell-modal">
+        <button class="close-btn" type="button" id="closeUpsellBtn"><i data-lucide="x"></i></button>
+        <img src="https://images.unsplash.com/photo-1543253687-c931c8e01820?auto=format&fit=crop&w=400&q=80" alt="Bebidas geladas" class="upsell-img" />
+        <h3 style="color: var(--primary); margin-top:15px;">Vai uma bebida gelada?</h3>
+        <p style="color: var(--text-muted); margin-bottom:20px;">Não esqueceu da bebida para acompanhar seu pedido? Temos refrigerantes e cervejas trincando!</p>
+        <div class="modal-actions" style="display:flex; flex-direction:column; gap:10px;">
+          <button class="btn btn-primary" type="button" id="goToDrinksBtn">Pegar bebida</button>
+          <button class="btn btn-secondary" type="button" id="noDrinkBtn">Não, obrigado</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="confirmModal">
+      <div class="modal-content">
+        <h2 style="color: var(--text-main);">Conferência do Pedido</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Confira todos os detalhes antes de enviar para nosso WhatsApp.</p>
+        
+        <div class="confirm-scroll" id="confirmData">
+          </div>
+        
+        <div class="modal-footer" style="margin-top: 15px;">
+          <button class="btn btn-secondary" type="button" id="editOrderBtn">Editar pedido</button>
+          <button class="btn btn-success" type="button" id="sendToWhatsAppBtn">
+            <i data-lucide="send"></i> Conferir e enviar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

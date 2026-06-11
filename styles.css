@@ -1,0 +1,260 @@
+/* VARIÁVEIS E CORES BASE - TOM PRETO E BRANCO COM VERDE E VERMELHO */
+:root {
+  --bg-dark: #000000;       /* Preto Puro */
+  --bg-panel: #111111;      /* Cinza Muito Escuro */
+  --bg-panel-hover: #222222; /* Cinza Escuro */
+  --primary: #28a745;       /* Verde (Ações principais/positivas) */
+  --primary-hover: #218838;
+  --accent: #dc3545;        /* Vermelho (Avisos/Atenção/Secundário) */
+  --success: #28a745;       /* Verde */
+  --text-main: #ffffff;      /* Branco Puro */
+  --text-muted: #aaaaaa;     /* Cinza Claro */
+  --border-color: rgba(255, 255, 255, 0.1); /* Borda clara sutil */
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+  --radius: 10px;
+  --header-height: 75px;
+  --transition: all 0.25s ease;
+}
+
+/* RESET GERAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* FUNDO ESTILIZADO AJUSTADO PARA PRETO */
+.bg-pattern {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.98)),
+    url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1920&q=20');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+/* TIPOGRAFIA */
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+/* CABEÇALHO */
+.site-header {
+  position: fixed;
+  top: 0; width: 100%; height: var(--header-height);
+  background: rgba(17, 17, 17, 0.95); /* bg-panel com opacidade */
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; z-index: 100;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 800; }
+.brand span { color: var(--text-main); } /* Mantém nome branco */
+.brand img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+.main-nav { display: flex; gap: 24px; }
+.main-nav a { color: var(--text-main); text-decoration: none; font-weight: 500; font-size: 1.05rem; transition: var(--transition); }
+.main-nav a:hover { color: var(--primary); } /* Hover Verde */
+.menu-toggle { display: none; background: none; border: none; color: var(--text-main); cursor: pointer; }
+
+/* BOTÕES GERAIS */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 24px; border: none; border-radius: var(--radius);
+  font-weight: 600; font-size: 1rem; cursor: pointer; text-decoration: none;
+  transition: var(--transition); font-family: 'Inter', sans-serif;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+/* Botão Primário agora é Verde */
+.btn-primary { background: var(--primary); color: #ffffff; }
+.btn-primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); }
+.btn-secondary { background: var(--bg-panel-hover); color: var(--text-main); border: 1px solid var(--border-color); }
+.btn-secondary:hover:not(:disabled) { background: #333333; }
+/* Botão Success continua Verde (já estava) */
+.btn-success { background: var(--success); color: white; }
+.btn-success:hover:not(:disabled) { background: #218838; transform: translateY(-2px); }
+/* Texto de botão segue primário (Verde) */
+.btn-text { background: transparent; color: var(--primary); padding: 8px; }
+.btn-text:hover { color: var(--primary-hover); text-decoration: underline; }
+.full { width: 100%; }
+
+/* HERO SECTION */
+.hero {
+  padding: calc(var(--header-height) + 60px) 5% 60px;
+  text-align: center; display: flex; flex-direction: column; align-items: center;
+}
+.hero-content { max-width: 650px; }
+.hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px; color: var(--text-main); line-height: 1.1; }
+.hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 30px; }
+
+/* LAYOUT SEÇÕES */
+.section { padding: 60px 5%; }
+.bg-darker { background: rgba(0, 0, 0, 0.5); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+.section-title { font-size: 2.4rem; text-align: center; color: var(--text-main); margin-bottom: 10px; }
+.section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem; }
+.category-title { font-size: 1.6rem; color: var(--text-main); border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; margin-bottom: 20px; } /* Detalhe Verde */
+
+/* GRIDS E CARDS */
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.menu-card {
+  background: var(--bg-panel); border: 1px solid var(--border-color);
+  border-radius: var(--radius); padding: 20px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: var(--transition);
+}
+.menu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--primary); } /* Hover Verde */
+.menu-card-title { font-size: 1.15rem; color: var(--text-main); margin-bottom: 8px; font-family: 'Inter', sans-serif; font-weight: 700; }
+.menu-card-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; flex-grow: 1; }
+.menu-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 15px; }
+.menu-card-price { font-size: 1.2rem; font-weight: bold; color: var(--text-main); } /* Preço Branco */
+
+/* CARRINHO (LATERAL) */
+.cart-btn {
+  background: var(--bg-panel); border: 1px solid var(--border-color);
+  color: var(--text-main); padding: 10px; border-radius: 50%;
+  cursor: pointer; position: relative; transition: var(--transition);
+}
+.cart-btn:hover { background: var(--bg-panel-hover); color: var(--primary); }
+/* Badge Vermelho de Destaque */
+.cart-badge {
+  position: absolute; top: -5px; right: -5px; background: var(--accent); /* Vermelho */
+  color: white; font-size: 0.75rem; font-weight: bold;
+  width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+}
+.cart-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8); z-index: 1000; opacity: 0; pointer-events: none; transition: var(--transition);
+}
+.cart-overlay.active { opacity: 1; pointer-events: all; }
+.cart-drawer {
+  position: fixed; top: 0; right: -100%; width: 100%; max-width: 420px; height: 100%;
+  background: var(--bg-dark); z-index: 1001; transition: var(--transition);
+  display: flex; flex-direction: column; box-shadow: -5px 0 25px rgba(0,0,0,0.9);
+  border-left: 1px solid var(--border-color);
+}
+.cart-drawer.active { right: 0; }
+.cart-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--border-color); background: var(--bg-panel); }
+.close-btn { background: none; border: none; color: var(--text-main); cursor: pointer; padding: 5px; transition: var(--transition); }
+.close-btn:hover { color: var(--accent); transform: scale(1.1); } /* Hover Vermelho */
+.cart-body { flex: 1; overflow-y: auto; padding: 20px; }
+
+/* ETAPAS DO CARRINHO */
+.cart-step { display: none; animation: fadeIn 0.3s ease; }
+.cart-step.active { display: block; }
+.step-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
+
+/* FORMULÁRIOS */
+form label { display: block; margin-bottom: 15px; font-weight: 500; font-size: 0.9rem; color: var(--text-muted); }
+form input, form select, form textarea {
+  width: 100%; padding: 12px; margin-top: 6px;
+  background: var(--bg-panel); border: 1px solid var(--border-color);
+  border-radius: var(--radius); color: var(--text-main); font-family: 'Inter', sans-serif;
+  transition: var(--transition); font-size: 1rem;
+}
+form input:focus, form select:focus, form textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2); } /* Focus Verde */
+
+/* RESUMO DO CLIENTE */
+.customer-summary {
+  background: var(--bg-panel); border: 1px solid var(--border-color);
+  padding: 15px; border-radius: var(--radius); margin-bottom: 20px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.customer-summary strong { color: var(--text-main); }
+.customer-summary p { font-size: 0.85rem; color: var(--text-muted); margin-top: 5px; line-height: 1.4; }
+
+/* LISTA DE ITENS CARRINHO */
+.cart-items-list { margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px; }
+.cart-item { background: var(--bg-panel); padding: 15px; border-radius: var(--radius); border: 1px solid var(--border-color); }
+.cart-item-header { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; color: var(--text-main); } /* Nome Branco */
+.cart-item-details { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4; }
+.cart-item-actions { display: flex; align-items: center; gap: 15px; border-top: 1px dashed var(--border-color); padding-top: 10px; }
+.qty-btn { background: var(--bg-panel-hover); border: 1px solid var(--border-color); color: var(--text-main); width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+.qty-btn:hover { background: var(--primary); color: #ffffff; } /* Hover Verde */
+/* Botão remover Vermelho */
+.remove-btn { color: var(--accent); background: none; border: none; font-size: 0.85rem; cursor: pointer; margin-left: auto; display: flex; align-items: center; gap: 4px; }
+.remove-btn:hover { color: #ff4d5c; text-decoration: underline; }
+
+.cart-total { display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; padding-top: 15px; border-top: 1px solid var(--border-color); }
+.cart-total span { color: var(--text-muted); }
+.cart-total strong { color: var(--text-main); font-size: 1.4rem; } /* Total Branco */
+
+/* MODAIS */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9); backdrop-filter: blur(4px);
+  z-index: 2000; display: none; align-items: center; justify-content: center; padding: 15px;
+}
+.modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+.modal-content {
+  background: var(--bg-panel); border: 1px solid var(--border-color);
+  border-radius: var(--radius); width: 100%; max-height: 90vh; overflow-y: auto;
+  position: relative; padding: 25px; box-shadow: var(--shadow);
+}
+.modal-content.large { max-width: 650px; }
+.modal-content.small { max-width: 400px; }
+/* Títulos de modais agora brancos, detalhes seguem JS */
+.modal-content h2 { color: var(--text-main); margin-bottom: 20px; padding-right: 30px; }
+.modal-content > .close-btn { position: absolute; top: 20px; right: 20px; }
+
+/* CASCATA DO BUILDER DE PIZZA */
+.builder-step { margin-bottom: 20px; background: var(--bg-dark); padding: 18px; border-radius: var(--radius); border: 1px solid var(--border-color); transition: var(--transition); }
+.builder-step.disabled { opacity: 0.4; pointer-events: none; filter: grayscale(100%); }
+.builder-step label { font-weight: bold; color: var(--text-main); display: block; margin-bottom: 10px; font-size: 1.05rem; }
+/* Helper primário (Verde) */
+.step-helper { font-size: 0.85rem; color: var(--primary); margin-bottom: 10px; font-style: italic; }
+/* Warning Vermelho */
+.warning-text { color: var(--accent); font-size: 0.85rem; font-weight: normal; margin-left: 10px; }
+.flavor-list { display: grid; grid-template-columns: 1fr; gap: 12px; max-height: 250px; overflow-y: auto; padding-right: 8px; }
+.flavor-list::-webkit-scrollbar { width: 6px; }
+.flavor-list::-webkit-scrollbar-track { background: var(--bg-dark); }
+.flavor-list::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; } /* Scrollbar Verde */
+.flavor-item { display: flex; align-items: flex-start; gap: 12px; background: var(--bg-panel); padding: 12px; border-radius: 8px; cursor: pointer; border: 1px solid var(--border-color); transition: var(--transition); }
+.flavor-item:hover { border-color: var(--primary); background: var(--bg-panel-hover); } /* Hover Verde */
+.flavor-item input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; } /* Checkbox Verde */
+.flavor-info { flex: 1; }
+.flavor-name { font-weight: 700; font-size: 1rem; color: var(--text-main); }
+/* Badge de categoria Verde */
+.flavor-tier { font-size: 0.75rem; background: var(--primary); color: #ffffff; padding: 2px 6px; border-radius: 4px; margin-left: 5px; vertical-align: middle; font-weight: 600; }
+.flavor-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; line-height: 1.3; }
+
+.modal-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border-color); }
+.builder-total { font-size: 1.2rem; color: var(--text-muted); }
+.builder-total strong { color: var(--text-main); font-size: 1.4rem; } /* Total Branco */
+
+/* MODAL UPSELL */
+.text-center { text-align: center; }
+.upsell-img { width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius); }
+/* Título upsell segue JS, textos muted */
+.upsell-modal p { color: var(--text-muted); }
+
+/* MODAL DE CONFERÊNCIA */
+.confirm-scroll { max-height: 55vh; overflow-y: auto; background: var(--bg-dark); padding: 15px; border-radius: var(--radius); border: 1px solid var(--border-color); font-size: 0.95rem; }
+.confirm-section { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-color); }
+.confirm-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+/* Títulos conferência JS segue primário (Verde) */
+.confirm-section p { color: var(--text-muted); margin-bottom: 5px; line-height: 1.4; }
+.confirm-section strong { color: var(--text-main); }
+
+/* ANIMAÇÕES */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .menu-toggle { display: block; }
+  .main-nav { display: none; position: absolute; top: var(--header-height); left: 0; width: 100%; background: var(--bg-panel); flex-direction: column; padding: 20px; border-bottom: 1px solid var(--border-color); box-shadow: var(--shadow); }
+  .main-nav.active { display: flex; }
+  .hero h1 { font-size: 2.2rem; }
+  .modal-footer { flex-direction: column; gap: 15px; align-items: stretch; text-align: center; }
+  .flavor-list { grid-template-columns: 1fr; }
+  .cart-drawer { width: 90%; max-width: none; }
+}
